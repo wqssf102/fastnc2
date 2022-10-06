@@ -112,7 +112,7 @@ grp2$grp <- "NP"
 grpnc <- rbind(grp1,grp2)
 ##指定图例的顺序
 grpnc$grp <- factor(grpnc$grp,levels = c("CK","NP"))
- ggplot(ncres, aes(del_numbel, nc_index,color=grp)) +##grp为将多个网络图合并时的分组
+ ggplot(grpnc, aes(del_numbel, nc_index,color=grp)) +##grp为将多个网络图合并时的分组
   # geom_point() +
   geom_smooth(formula = y~x,se = FALSE,method = "lm",show.legend = F)+
   stat_poly_eq(formula = y~x,size=5,family="serif",method = "lm",
