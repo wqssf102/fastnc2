@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
 		data_R = data_R + natural_connectivity(data_M, fastnc_options.threshold_name);
 	}
 	// MPI::Finalize();
-	 data_R = data_R / fastnc_options.number_name * 1.0;//取跑N次的均值，当前测试N为10
+	 data_R = data_R / fastnc_options.number_name * 1.0;
 
 	
 	// for(int i =0; i < data_R.rows(); i++){
@@ -61,10 +61,7 @@ int main(int argc, char **argv) {
 
 
 ///////////////////////////////
-//   Object Initialisation   //
-///////////////////////////////
 
-// Initialise a FastNC object (must be parsed a pointer to an OTU table struct and other paramters)
 FastNC::FastNC(const std::string &inputfile, const std::string &outfile, const float &_threshold, const int &_number, const int &_jobs) {
     adj_table_filename = inputfile;
     outpfile_filename = outfile;
@@ -73,9 +70,6 @@ FastNC::FastNC(const std::string &inputfile, const std::string &outfile, const f
 	jobs_name = _jobs;
 }
 
-//下面的函数需要添加FastNC::  吗？我现在只是在最后面的natural_connectivity处添加
-
-//定义一个获取文件行数的函数，用来设置Matrix的行和列
 
 ////定义一个获取文件行数的函数，用来设置Matrix的行和列
 int GetFileCount(const std::string& szFile)
@@ -125,7 +119,7 @@ vector<string> split(const string& s, char delim) {
 MatrixXd readmyfile(const std::string& ldfile)
 {
 	MatrixXd myfile = Matrix<double, Dynamic, Dynamic, ColMajor>();
-	int rowCount = GetFileCount(ldfile);//我把您写的GetFileCount函数用到这里了
+	int rowCount = GetFileCount(ldfile);
 	myfile.resize(rowCount, rowCount);
 	ifstream infile(ldfile);
 	if (infile.is_open())
@@ -155,7 +149,6 @@ MatrixXd readmyfile(const std::string& ldfile)
 
 
 ////定义一个计算特征值和进一步计算最终目标的函数
-////下面这个函数缺一个功能，就是当某个矩阵不存在特征值时，可以返回0值
 float get_nc(MatrixXd& M, int const tt_num)
 {
 	// EigenSolver<MatrixXd> es(M);
@@ -174,14 +167,7 @@ float get_nc(MatrixXd& M, int const tt_num)
 }
 
 
-////测试和输出结果
-//int main()
-//{
-//	MatrixXd AA = readmyfile("3.txt");
-//	//get_nc(AA, "C:/vstest/hello word/Project1/66.txt");
-//}
-//
-//
+
 ////定义一个随机抽样的函数
 set<int> mysample(int const total_num, int const del_num)
 {
@@ -213,16 +199,6 @@ set<int> mysample(int const total_num, int const del_num)
 	return del_num_res;
 }
 
-
-
-//////测试随机生成数据的结果
-//void printSet(set<int>& s)
-//{
-//	for (set<int>::iterator it = s.begin(); it != s.end(); it++)
-//	{
-//		cout << *it << endl;
-//	}
-//}
 
 
 ////定义一个删除Martix行和列的函数，这个函数我还没测试，太困了...
