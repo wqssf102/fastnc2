@@ -73,7 +73,7 @@ g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastncn fastnc.cpp fast
 time mydir/fastncn -c filedir/adj_tab.txt -j 28 -n 1000 -o outdir/ncres.txt
 conda deactivate
  ```
- &emsp;&emsp;邻接矩阵如何获得，方法之一是用过R软件的igraph包导出，如：
+ &emsp;&emsp;邻接矩阵如何获得，方法之一是通过R软件的igraph包导出，如：
  ```
 library(igraph)
 ##gg为igraph对象的网络图数据
