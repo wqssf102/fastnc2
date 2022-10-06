@@ -137,7 +137,8 @@ grpnc$grp <- factor(grpnc$grp,levels = c("CK","NP"))
 
 
  ```
- &emsp;&emsp;我们的软件还在开发中，若你对软件的功能有需求或发现软件问题，请联系作者：565715597@qq.com  
+ &emsp;&emsp;我们建议将网络图的节点控制在500个以下，网络节点太多导致计算量太大，服务器算不过来。我们的软件还在开发中，若你对软件的功能有需求或发现软件问题，请联系作者：565715597@qq.com  
+ &emsp;&emsp;此软件调用了mkl库来加速，我们只用于科学研究和学习中。若用户将我们的软件商用，那么请购买mkl库。
  参考文献：  
  
  [1] Wu MH, Chen SY, Chen JW, Xue K, Chen SL, Wang XM, Chen T, Kang SC, Rui JP, Thies JE, Bardgett RD, Wang YF. Reduced microbial stability in the active layer is associated with carbon loss under alpine permafrost degradation. Proc Natl Acad Sci U S A. 2021 Jun 22;118(25):e2025321118. doi: 10.1073/pnas.2025321118.  
