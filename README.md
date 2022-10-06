@@ -5,7 +5,7 @@
 删除、同时删掉剩余矩阵中孤立的节点，正如前面所言，M个节点有多种情况组合，因此我们提供了一个参数n，用来多次迭代删除，如我们在删除123个节点，那么我们从总
 节点中随机删除123个节点、删除剩余矩阵孤立节点并求“特征值”，这一步骤重复n次(如1000)，最后我们将n次的结算结果取均值，这样得到的结果更具代表性。  
 &emsp;&emsp;在实际数据分析过程中，用随机删除M个节点并迭代n次的做法具有很大的计算量。一开始我们分别用R并行计算、Python的numpy模块计算（同时也用了并行），在给出
-指定的线程里计算，结果服务器显示任务超线程了（如给出28线程，结果服务器显示已经调用了500多线性或800多）。然而在不并行的情况下，用R计算300个节点的网络图
+指定的线程里计算，结果服务器显示任务超线程了（如给出28线程，结果服务器显示已经调用了500多线程或800多）。然而在不并行的情况下，用R计算300个节点的网络图
 的抗毁性需要几小时左右（当然取决于计算机的性能，这里不是说R和Python不好）。最后，我们转向了C++软件，调用了[Eigen库](https://eigen.tuxfamily.org/index.php?title=Main_Page)、
 通过[OpenMP](https://www.openmp.org/)并行和通过intel公司的[mkl库](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html#gs.esqumy)来加速，300个节点网络的计算在28线程、ram为64G的服务器单节点上，只需要3分钟左右即可算完（迭代1000次）。  
 
@@ -60,7 +60,7 @@ g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastncn fastnc.cpp fast
  ${MKLROOT}/lib/intel64/libmkl_blacs_openmpi_ilp64.a \
  -Wl,--end-group -lgomp -lpthread -lm -ldl
 ``` 
- &emsp;&emsp;我们推荐直接用sorft里的文件，这是我们已经编译号的软件，但在不同的系统中可能缺少不同的依赖文件,若在某些服务器上无法运行，我们推荐在fastspar软件的环境中运行。fastspar的安装方式:
+ &emsp;&emsp;我们推荐直接用sorft里的文件，这是我们已经编译好的软件，但在不同的系统中可能缺少不同的依赖文件,若在某些服务器上无法运行，我们推荐在fastspar软件的环境中运行。fastspar的安装方式:
  ```
  conda create -n fastspar -c bioconda fastspar
  ```
