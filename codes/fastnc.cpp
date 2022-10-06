@@ -13,19 +13,9 @@ int main(int argc, char **argv) {
 	// //
 	MatrixXd data_R = Matrix<double, Dynamic, 2>();
 	data_R.setZero(ceil(data_M.rows()*fastnc_options.threshold_name),2);
-	// data_R.resize(ceil(data_M.rows()*fastnc_options.threshold_name), 3);
-		// //循环计算，然后结果相加,采用openmp并行计算
-    // int myid;
-    // int nprocs;
-    // MPI::Init();
-    // myid=MPI::COMM_WORLD.Get_rank();
-    // nprocs=MPI::COMM_WORLD.Get_size();
 		omp_set_num_threads(fastnc_options.jobs_name);
-		//#pragma omp parallel for shared(data_R), private(data_T) 
 		#pragma omp declare reduction( + : Eigen::MatrixXd : omp_out += omp_in ) initializer( omp_priv = omp_orig )
 		#pragma omp parallel for reduction(+:data_R), schedule(static, 1)
-		// #pragma omp parallel for shared(data_R), private(data_T) 
-		// #pragma omp parallel for
 	for (int i =1;i <= fastnc_options.number_name;i++)
 	{
 		printf("\tRunning %d\n", i);
@@ -59,8 +49,6 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-
-///////////////////////////////
 
 FastNC::FastNC(const std::string &inputfile, const std::string &outfile, const float &_threshold, const int &_number, const int &_jobs) {
     adj_table_filename = inputfile;
@@ -141,16 +129,9 @@ MatrixXd readmyfile(const std::string& ldfile)
 ////定义一个计算特征值和进一步计算最终目标的函数
 float get_nc(MatrixXd& M, int const tt_num)
 {
-	// EigenSolver<MatrixXd> es(M);
-	// MatrixXd D = es.pseudoEigenvalueMatrix();  //获取特征值
-	// //cout << D.diagonal() << endl;
-	// MatrixXd Dd = D.diagonal();
-	// MatrixXd Ddd = Dd.array().exp();           //用exp处理特征值
-	// double res = log(Ddd.sum() / Ddd.rows());  //进一步计算得到最终目标
-	//上面代码求了特征值和特征向量，可能是因为这样就耗时了。使用下面的代码直接求特征值，时间可减少近一半
 	VectorXcd eivals = M.eigenvalues();
 	MatrixXd res = eivals.real();
-    res = res.array().exp();//获得实数部分并且做exp计算
+        res = res.array().exp();//获得实数部分并且做exp计算
 	double rest = log(res.sum() / res.rows());
 	rest = rest / ((tt_num*1.0) - log((tt_num*1.0)));
 	return rest;
