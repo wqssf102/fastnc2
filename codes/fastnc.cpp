@@ -70,7 +70,6 @@ FastNC::FastNC(const std::string &inputfile, const std::string &outfile, const f
 	jobs_name = _jobs;
 }
 
-
 ////定义一个获取文件行数的函数，用来设置Matrix的行和列
 int GetFileCount(const std::string& szFile)
 {
@@ -80,16 +79,11 @@ int GetFileCount(const std::string& szFile)
 		cerr << "can not open file" << endl;
 		return -1;
 	}
-
-
 	char c;
 	int lineCnt = 0;
 	while (fin.get(c))
 	{
- 
- 
-
-		if (c == '\n')
+ 		if (c == '\n')
 			lineCnt++;
 	}
 	//cout << lineCnt << endl;
@@ -98,7 +92,7 @@ int GetFileCount(const std::string& szFile)
 	return lineCnt;
 }
 //
-////定义一个拆分文件的函数，后面的文件都是统一为tab键隔开，这一行需要更改，可能用默认的就行
+////定义一个拆分文件的函数
 void _split(const string& s, char delim, vector<string>& elems) {
 	stringstream ss(s);
 	string item;
@@ -112,8 +106,6 @@ vector<string> split(const string& s, char delim) {
 	_split(s, delim, elems);
 	return elems;
 }
-
-
 
 //读取数据
 MatrixXd readmyfile(const std::string& ldfile)
@@ -145,8 +137,6 @@ MatrixXd readmyfile(const std::string& ldfile)
 
 	return myfile;
 }
-
-
 
 ////定义一个计算特征值和进一步计算最终目标的函数
 float get_nc(MatrixXd& M, int const tt_num)
@@ -201,7 +191,7 @@ set<int> mysample(int const total_num, int const del_num)
 
 
 
-////定义一个删除Martix行和列的函数，这个函数我还没测试，太困了...
+////定义一个删除Martix行和列的函数
 void remove_row_col(MatrixXd& M, unsigned int rowToRemove) {
 	unsigned int numRows = M.rows() - 1;
 	unsigned int numCols = M.cols() - 1;
