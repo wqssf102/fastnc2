@@ -1,4 +1,4 @@
-# fastncn
+# fastnc
 &emsp;&emsp;根据文献报道，从网络图中提取邻阶矩阵（0、1矩阵，0代表指标间没有边，1代表指标间有边），然后依次删除节点并求剩余矩阵的“特征值”。通过将计算结果与删除节点比例
 做线性回归并提取slope值，比较不同网络图之间的slope数值大小（简单说，就是看回归线下降的趋势）以反映网络的抗毁性。在实践中，一个网络图有N个节点，那么当
 删除M个节点时，M个节点有多个情况的节点组合，目前一些文献是通过degree、BC拓扑特征对节点排序，然后依次删除。在这里，我们用另外的做法，即随机抽取M个节点并
@@ -11,12 +11,12 @@
 
 &emsp;&emsp;特别说明，在将C++代码封装为命令行结构时，我们参考了[fastspar](https://github.com/scwatts/fastspar)软件（用C++实现sparcc算法的快速软件）。软件的参数如下：
 ```
-fastncn --h
-Program: FastNC (c++ calculate)
+fastnc --h
+Program: FastNC (use c++ to calculate the natural connectivity)
 Contact: Qiusheng WU (565715597@qq.com)
 
 Usage:
-  fastncn [options] --adj_table <file> --outfile <file>
+  fastnc [options] --adj_table <file> --outfile <file>
 
   -c <file>, --adj_table <file>
                 The result from get.adjacency function of igraph package
@@ -26,6 +26,8 @@ Usage:
 Options:
   -t <float>, -threshold <float>
                 The threshold for deletion of node (default: 0.8)
+  -g <float>, -edge <float>
+                The threshold for deletion of edge (default: 0)
   -n <int>, -number <int>
                 Number of iterations (default: 1000)
   -j <int>, -job <int>
@@ -42,6 +44,8 @@ Other:
 
 -t 为删除物种（节点的阈值），默认为0.8，即从1%删到80%
 
+-g 删除边的比例，即使，先删掉节点，在剩余矩阵中随机删除边
+
 -n 为迭代次数，默认1000，因为我们不知道环境变化会使哪些物种消失，因此这里采用了随机抽样，建议至少迭代1000次。
 
 -j 线程数，默认为4。
@@ -51,7 +55,7 @@ Other:
 ```
 MKLROOT=/opt/intel/oneapi/mkl/2022.1.0
 ##
-g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastncn fastnc.cpp fastnc_opts.cpp common.cpp -DMKL_ILP64 -m64\
+g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc fastnc.cpp fastnc_opts.cpp common.cpp -DMKL_ILP64 -m64\
  ${MKLROOT}/lib/intel64/libmkl_scalapack_ilp64.a \
  -Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_cdft_core.a \
  ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a \
@@ -70,7 +74,7 @@ g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastncn fastnc.cpp fast
 ##或许需要添加下面的代码来指定动态库
 ##port LD_LIBRARY_PATH=/home/yourname/anaconda3/envs/fastspar/lib
 ######开始计算
-time mydir/fastncn -c filedir/adj_tab.txt -j 28 -n 1000 -o outdir/ncres.txt
+time mydir/fastnc -c filedir/adj_tab.txt -j 28 -n 1000 -o outdir/ncres.txt
 conda deactivate
  ```
  &emsp;&emsp;邻接矩阵如何获得，方法之一是通过R软件的igraph包导出，如：
