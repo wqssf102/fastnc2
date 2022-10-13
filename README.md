@@ -9,7 +9,11 @@
 的抗毁性需要几小时左右（当然取决于计算机的性能，这里不是说R和Python不好）。最后，我们转向了C++软件，调用了[Eigen库](https://eigen.tuxfamily.org/index.php?title=Main_Page)、
 通过[OpenMP](https://www.openmp.org/)并行和通过intel公司的[mkl库](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html#gs.esqumy)来加速，300个节点网络的计算在28线程、ram为64G的服务器单节点上，只需要3分钟左右即可算完（迭代1000次）。  
 
-&emsp;&emsp;特别说明，在将C++代码封装为命令行结构时，我们参考了[fastspar](https://github.com/scwatts/fastspar)软件（用C++实现sparcc算法的快速软件）。软件的参数如下：
+&emsp;&emsp;特别说明，在将C++代码封装为命令行结构时，我们参考了[fastspar](https://github.com/scwatts/fastspar)软件（用C++实现sparcc算法的快速软件）。软件可通过conda安装，
+```
+conda create -n fastnc -c wqssf102 fastnc -y
+```
+软件的参数如下：
 ```
 fastnc --h
 Program: FastNC (use c++ to calculate the natural connectivity)
@@ -50,7 +54,13 @@ Other:
 
 -j 线程数，默认为4。
  ```
- &emsp;&emsp;fastncn软件目前只在Linux系统下测试，其他系统没测试过（Win系统肯定是不行）。Codes为软件的源码，源码需要编译才能使用，用户若想自己编译，那么需要配置依赖的库和软件,编译方式
+  运行如下：
+ ```
+ conda activate fastnc
+time fastnc -c filedir/adj_tab.txt -j 28 -n 1000 -o outdir/ncres.txt
+conda deactivate
+ ```
+ &emsp;&emsp;fastnc软件目前只在Linux系统下测试，其他系统没测试过（Win系统肯定是不行）。Codes为软件的源码，源码需要编译才能使用，用户若想自己编译，那么需要配置依赖的库和软件,编译方式
 为：
 ```
 MKLROOT=/opt/intel/oneapi/mkl/2022.1.0
@@ -64,19 +74,7 @@ g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc fastnc.cpp fastn
  ${MKLROOT}/lib/intel64/libmkl_blacs_openmpi_ilp64.a \
  -Wl,--end-group -lgomp -lpthread -lm -ldl
 ``` 
- &emsp;&emsp;我们推荐直接用sorft里的文件，这是我们已经编译好的软件，但在不同的系统中可能缺少不同的依赖文件,若在某些服务器上无法运行，我们推荐在fastspar软件的环境中运行。fastspar的安装方式:
- ```
- conda create -n fastspar -c bioconda fastspar
- ```
- 运行如下：
- ```
- conda activate fastspar
-##或许需要添加下面的代码来指定动态库
-##port LD_LIBRARY_PATH=/home/yourname/anaconda3/envs/fastspar/lib
-######开始计算
-time mydir/fastnc -c filedir/adj_tab.txt -j 28 -n 1000 -o outdir/ncres.txt
-conda deactivate
- ```
+
  &emsp;&emsp;邻接矩阵如何获得，方法之一是通过R软件的igraph包导出，如：
  ```
 library(igraph)
@@ -142,7 +140,7 @@ grpnc$grp <- factor(grpnc$grp,levels = c("CK","NP"))
 
  ```
  &emsp;&emsp;我们建议将网络图的节点控制在500个以下，网络节点太多导致计算量太大，服务器算不过来。我们的软件还在开发中，若你对软件的功能有需求或发现软件问题，请联系作者：565715597@qq.com  
- &emsp;&emsp;此软件调用了mkl库来加速，我们只用于科学研究和学习中。若用户将我们的软件商用，那么请购买mkl库。  
+
  
  参考文献：  
  
