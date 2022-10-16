@@ -11,7 +11,7 @@
 
 &emsp;&emsp;特别说明，在将C++代码封装为命令行结构时，我们参考了[fastspar](https://github.com/scwatts/fastspar)软件（用C++实现sparcc算法的快速软件）。软件可通过conda安装，
 ```
-conda create -n fastnc -c wqssf102 fastnc -y
+conda create -n fastnc -c wqssf102 -c conda-forge -c intel fastnc -y
 ```
 软件的参数如下：
 ```
@@ -54,27 +54,6 @@ Other:
 
 -j 线程数，默认为4。
  ```
-  运行如下：
- ```
- conda activate fastnc
-time fastnc -c filedir/adj_tab.txt -j 28 -n 1000 -o outdir/ncres.txt
-conda deactivate
- ```
- &emsp;&emsp;fastnc软件目前只在Linux系统下测试，其他系统没测试过（Win系统肯定是不行）。Codes为软件的源码，源码需要编译才能使用，用户若想自己编译，那么需要配置依赖的库和软件,编译方式
-为：
-```
-MKLROOT=/opt/intel/oneapi/mkl/2022.1.0
-##
-g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc fastnc.cpp fastnc_opts.cpp common.cpp -DMKL_ILP64 -m64\
- ${MKLROOT}/lib/intel64/libmkl_scalapack_ilp64.a \
- -Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_cdft_core.a \
- ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a \
- ${MKLROOT}/lib/intel64/libmkl_gnu_thread.a \
- ${MKLROOT}/lib/intel64/libmkl_core.a\
- ${MKLROOT}/lib/intel64/libmkl_blacs_openmpi_ilp64.a \
- -Wl,--end-group -lgomp -lpthread -lm -ldl
-``` 
-
  &emsp;&emsp;邻接矩阵如何获得，方法之一是通过R软件的igraph包导出，如：
  ```
 library(igraph)
@@ -83,6 +62,12 @@ adjtab <- as.matrix(get.adjacency(gg))
 ####导出01矩阵，然后使用服务器计算
 write.table(adjtab,"mydir/adj_tab.txt",quote=F,row.names=F,col.names=F,sep="\t")
  ```
+  运行如下：
+ ```
+ conda activate fastnc
+time fastnc -c filedir/adj_tab.txt -j 28 -n 1000 -o outdir/ncres.txt
+conda deactivate
+ ``` 
  &emsp;&emsp;最终结果如下：
  ```
  nc_index	del_numbel
@@ -140,6 +125,20 @@ grpnc$grp <- factor(grpnc$grp,levels = c("CK","NP"))
 
  ```
  &emsp;&emsp;我们建议将网络图的节点控制在500个以下，网络节点太多导致计算量太大，服务器算不过来。我们的软件还在开发中，若你对软件的功能有需求或发现软件问题，请联系作者：565715597@qq.com  
+ &emsp;&emsp;fastnc软件目前只在Linux系统下测试，其他系统没测试过（Win系统肯定是不行）。Codes为软件的源码，源码需要编译才能使用，用户若想自己编译，那么需要配置依赖的库和软件,编译方式
+为：
+```
+MKLROOT=/opt/intel/oneapi/mkl/2022.1.0
+##
+g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc fastnc.cpp fastnc_opts.cpp common.cpp -DMKL_ILP64 -m64\
+ ${MKLROOT}/lib/intel64/libmkl_scalapack_ilp64.a \
+ -Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_cdft_core.a \
+ ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a \
+ ${MKLROOT}/lib/intel64/libmkl_gnu_thread.a \
+ ${MKLROOT}/lib/intel64/libmkl_core.a\
+ ${MKLROOT}/lib/intel64/libmkl_blacs_openmpi_ilp64.a \
+ -Wl,--end-group -lgomp -lpthread -lm -ldl
+``` 
 
  
  参考文献：  
