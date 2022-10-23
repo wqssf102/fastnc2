@@ -2,7 +2,7 @@ package:
   name: fastnc
   version: 1.0.0
 source:
-  md5: c8f806d93831aa61bcb44929dcc6514c
+  md5: a2259ea649a99c0d5216b8d6717b130b
   url: https://github.com/wqssf102/fastnc/releases/download/fastnc/fastna.tar.gz
 build:
   number: '0'
