@@ -19,17 +19,16 @@ fastnc --h
 Program: FastNC (use c++ to calculate the natural connectivity)
 Contact: Qiusheng WU (565715597@qq.com)
 
-Usage:
   fastnc [options] --adj_table <file> --outfile <file>
-
   -c <file>, --adj_table <file>
                 The result from get.adjacency function of igraph package
   -o <file>, -outfile <file>
                 Result output table
-
 Options:
   -t <float>, -threshold <float>
                 The threshold for deletion of node (default: 0.8)
+  -s <int>, -step <int>
+                The step for deletion of node (default: 1)
   -g <float>, -edge <float>
                 The threshold for deletion of edge (default: 0)
   -n <int>, -number <int>
@@ -47,6 +46,9 @@ Other:
 -o 为输出文件，必须给出
 
 -t 为删除物种（节点的阈值），默认为0.8，即从1%删到80%
+
+-s 为步数，默认为1，假如step为3，那么就是依次删除1个节点，4个节点，7个节点，......,即第N次是删除（N+step）个节点（N>1）
+因此，当step大于1时，计算时间将大大缩短，适用于网络图节点多的情况
 
 -g 删除边的比例，即使，先删掉节点，在剩余矩阵中随机删除边
 
