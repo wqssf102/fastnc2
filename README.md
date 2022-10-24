@@ -87,7 +87,7 @@ conda deactivate
 0.555493312657	0.035294117647
 0.554323430896	0.038235294118
  ```
-nc_index为删除M个节点后剩余矩阵的“特征值”，del_numbel为删除节点所占总节点的百分比。  
+nc_index为删除M个节点后剩余矩阵的“特征值”，del_number为删除节点所占总节点的百分比。  
  
  &emsp;&emsp;最后用R绘图：
  ```
@@ -101,7 +101,7 @@ grp2$grp <- "NP"
 grpnc <- rbind(grp1,grp2)
 ##指定图例的顺序
 grpnc$grp <- factor(grpnc$grp,levels = c("CK","NP"))
- ggplot(grpnc, aes(del_numbel, nc_index,color=grp)) +##grp为将多个网络图合并时的分组
+ ggplot(grpnc, aes(del_number, nc_index,color=grp)) +##grp为将多个网络图合并时的分组
   # geom_point() +
   geom_smooth(formula = y~x,se = FALSE,method = "lm",show.legend = F)+
   stat_poly_eq(formula = y~x,size=5,family="serif",method = "lm",
