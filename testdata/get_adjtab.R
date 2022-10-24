@@ -1,4 +1,4 @@
-setwd("D:\\gongzhonghao\\fastnc")
+setwd("D:\\fastnc")
 ##读取物种数据
 sp <- read.csv("sp.csv",header = T,row.names = 1)
 head(sp,c(2,2))
