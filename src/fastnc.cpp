@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
 	data_R = data_R / fastnc_options.number_name * 1.0;//取跑N次的均值
 	ofstream datafile;
 	datafile.open(fastnc_options.outfile_filename, ios::out);
-	datafile <<"nc_index"<< "\t" << "del_numbel";
+	datafile <<"nc_index"<< "\t" << "del_number";
 	datafile << std::endl;
 	    for (unsigned int i = 0; i < data_R.rows(); ++i) {
         for (unsigned int j = 0; j < 2; ++j) {
