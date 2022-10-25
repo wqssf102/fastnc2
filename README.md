@@ -3,7 +3,7 @@
 &emsp;&emsp;基于上述内容，我们基于C++语言和调用了[Eigen库](https://eigen.tuxfamily.org/index.php?title=Main_Page)、
 通过[OpenMP](https://www.openmp.org/)并行和[mkl库](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html#gs.esqumy)来加速，300个节点网络的计算在28线程、ram为64G的服务器单节点上，只需要3分钟左右即可算完（迭代1000次）。  
 
-&emsp;&emsp;特别说明，在将C++代码封装为命令行结构时，我们参考了[fastspar](https://github.com/scwatts/fastspar)软件（用C++实现sparcc算法的快速软件）。软件可通过conda安装，
+&emsp;&emsp;特别说明，在将C++代码封装为命令行结构时，我们参考了[fastspar](https://github.com/scwatts/fastspar)软件（用C++实现sparcc算法的快速软件）。fastnc可通过conda安装，
 ```
 conda create -n fastnc -c wqssf102 -c conda-forge -c intel fastnc -y
 ```
