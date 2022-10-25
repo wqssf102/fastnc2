@@ -160,15 +160,25 @@ ggsave("nc.tiff",width = 8,height = 6)
  &emsp;&emsp;fastnc软件目前只在Linux系统下测试，其他系统没测试过（Win系统肯定是不行）。src为软件的源码，源码需要编译才能使用，用户若想自己编译，那么需要配置依赖的库和软件,编译方式
 为：
 ```
-MKLROOT=/opt/intel/oneapi/mkl/2022.1.0
-##
+##构建一个环境并安装mkl
+conda create -n fastnc -c intel mkl-static -y
+##激活
+conda activate fastnc
+##安装eigen
+conda install -c conda-forge eigen
+##安装g++
+conda install -c conda-forge gxx
+##源码编译
+MKLROOT=conda_path/fastnc
+##将conda_path替换为自己的真实路径
 g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc fastnc.cpp fastnc_opts.cpp common.cpp -DMKL_ILP64 -m64\
- ${MKLROOT}/lib/intel64/libmkl_scalapack_ilp64.a \
- -Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_cdft_core.a \
- ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a \
- ${MKLROOT}/lib/intel64/libmkl_gnu_thread.a \
- ${MKLROOT}/lib/intel64/libmkl_core.a\
- ${MKLROOT}/lib/intel64/libmkl_blacs_openmpi_ilp64.a \
+ -I conda_path/fastnc/include \
+ -Wl,--start-group ${MKLROOT}/lib/libmkl_cdft_core.a \
+ ${MKLROOT}/lib/libmkl_scalapack_ilp64.a \
+ ${MKLROOT}/lib/libmkl_intel_ilp64.a \
+ ${MKLROOT}/lib/libmkl_gnu_thread.a \
+ ${MKLROOT}/lib/libmkl_core.a\
+ ${MKLROOT}/lib/libmkl_blacs_openmpi_ilp64.a \
  -Wl,--end-group -lgomp -lpthread -lm -ldl
 ``` 
 
