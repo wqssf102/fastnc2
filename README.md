@@ -171,7 +171,7 @@ conda install -c conda-forge gxx
 ##源码编译
 MKLROOT=conda_path/fastnc
 ##将conda_path替换为自己的真实路径
-g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc fastnc.cpp fastnc_opts.cpp common.cpp -DMKL_ILP64 -m64\
+g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc src/fastnc.cpp src/fastnc_opts.cpp src/common.cpp -DMKL_ILP64 -m64\
  -I conda_path/fastnc/include \
  -Wl,--start-group ${MKLROOT}/lib/libmkl_cdft_core.a \
  ${MKLROOT}/lib/libmkl_scalapack_ilp64.a \
