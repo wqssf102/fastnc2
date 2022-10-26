@@ -154,7 +154,7 @@ ggsave("nc.pdf",width = 8,height = 6)
 ggsave("nc.tiff",width = 8,height = 6)
  ```
  ### 以上代码和例子数据在testdata目录
- ![结果如图](https://github.com/wqssf102/fastnc/NC/nc.jpg)
+ ![结果如图](https://github.com/wqssf102/fastnc/blob/main/testdata/NC/nc.jpg)
  ## 关于计算速度和时间
  &emsp;&emsp; 1、我们建议将网络图的节点控制在500个以下，网络节点太多导致计算量太大，服务器算不过来。
  &emsp;&emsp; 2、若用户的网络包含的节点比较多（如几千个节点），假如用户想要迭代1000次，当服务器的运行内存不大时，我们建议分为4个任务提交到服务器中，每个任务执行250次的迭代，最后取4个任务计算结果的均值即可，这样会大大缩减用户等待的时间。特别地，可以通过设置step参数（如step设置为3）来扩大删除节点的步长，这样耗时将显著减少。总之，step是一个很有用的参数。我们的软件还在开发中，若你对软件的功能有需求或发现软件问题，请联系作者：565715597@qq.com  
