@@ -1,9 +1,10 @@
 # fastnc：Fast calculation of natural connectivity
-# Install
+## INSTALLATION
+**conda**
 ```
 conda create -n fastnc -c wqssf102 -c conda-forge -c intel fastnc -y
 ```
-软件的参数如下：
+**help**：
 ```
 fastnc --h
 Program: FastNC (use c++ to calculate the natural connectivity)
@@ -39,8 +40,5 @@ Other:
 * English version
 
   In the plan
-  
- 
- 
   
   
