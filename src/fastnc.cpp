@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
 		"  Contact: Qiusheng WU (565715597@qq.com)");
     desc.add_options()
         ("help,h", "help message")
-        ("input,i", po::value<std::string>(), "input.txt,The first column is the name of the indicator, such as ASV/OTU or Gene")
+        ("input,i", po::value<std::string>(), "input.txt,The result from get.adjacency function of igraph package")
 		("output,o", po::value<std::string>(), "output.txt")
 		("step,s", po::value<int>(&step)->default_value(default_step), "number of threads (default 1)")
 		("thread,t", po::value<double>(&thread)->default_value(default_thread,"0.80"), "the threshold for deletion of node (default: 0.8)")
