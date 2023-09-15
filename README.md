@@ -19,7 +19,6 @@ g++
 ```
 ```
 MKLROOT=pathA
-Eigendir=pathB
 g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc src/fastnc.cpp src/common.cpp -DMKL_ILP64 -m64\
  -I ${Eigendir}/include \
  -Wl,--start-group ${MKLROOT}/lib/libmkl_cdft_core.a \
