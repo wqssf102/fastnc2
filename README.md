@@ -4,7 +4,7 @@ FastNC can be installed using conda or from source.
 ## Conda
 To install through conda, use:
 ```
-conda create -n fastnc -c wqssf102 -c fastnc
+conda create -n fastnc -c wqssf102 fastnc
 ```
 ## Compiling from source
 ```
