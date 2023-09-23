@@ -50,7 +50,7 @@ Contact: Qiusheng WU (565715597@qq.com)
 
 * Chinese version
 
-  <u>https://wqssf102.github.io/fastnc++/</u>
+  <u>https://wqssf102.github.io/fastnc2/</u>
 
 * English version
 
