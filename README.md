@@ -1,6 +1,5 @@
 # FastNC2：Fast calculation of natural connectivity, old name FastNC
 ## Installing
-FastNC2 can be installed using conda or from source.
 ## Conda
 To install through conda, use:
 ```
