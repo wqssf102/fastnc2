@@ -1,17 +1,17 @@
 # FastNC2：Fast calculation of natural connectivity, old name FastNC
-## Installing
-## Conda
+### Installing
+### Conda
 To install through conda, use:
 ```
 conda create -n fastnc2 -c wqssf102 fastnc2
 ```
-## Or download the compiled version
+### Or download the compiled version
 
 - 1. Download: https://github.com/wqssf102/fastnc2/releases/download/fastnc2/fastnc2.tar.gz
 - 2. tar xzvf fastnc2.tar.gz
 - 3. chmod a+x fastnc2
 
-**help**：
+**usage**：
 ```
 fastnc2 --h
 Program: FastNC2 (use c++ to calculate the natural connectivity)
