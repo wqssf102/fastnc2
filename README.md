@@ -8,7 +8,9 @@ conda create -n fastnc2 -c wqssf102 fastnc2
 ```
 ## Or download the compiled version
 ```
-([Download](https://github.com/wqssf102/fastnc2/releases/download/fastnc2/fastnc2.tar.gz))
+1. Download: https://github.com/wqssf102/fastnc2/releases/download/fastnc2/fastnc2.tar.gz
+2. tar xzvf fastnc2.tar.gz
+3. chmod a+x fastnc2
 ```
 **help**：
 ```
