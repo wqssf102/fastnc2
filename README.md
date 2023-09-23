@@ -1,10 +1,10 @@
-# FastNC：Fast calculation of natural connectivity
+# FastNC++：Fast calculation of natural connectivity
 ## Installing
-FastNC can be installed using conda or from source.
+FastNC++ can be installed using conda or from source.
 ## Conda
 To install through conda, use:
 ```
-conda create -n fastnc -c wqssf102 fastnc
+conda create -n fastnc++ -c wqssf102 fastnc++
 ```
 ## Compiling from source
 ```
@@ -31,12 +31,11 @@ g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc src/fastnc.cpp s
 ```
 **help**：
 ```
-fastnc --h
-Program: FastNC (use c++ to calculate the natural connectivity)
+fastnc++ --h
+Program: FastNC++ (use c++ to calculate the natural connectivity)
 Contact: Qiusheng WU (565715597@qq.com)
 
-  -i [ --input ] arg          input.txt,The first column is the name of the
-                              indicator, such as ASV/OTU or Gene
+  -i [ --input ] arg          input.txt,The result from get.adjacency function of igraph package
   -o [ --output ] arg         output.txt
   -s [ --step ] arg (=1)      number of threads (default 1)
   -t [ --thread ] arg (=0.80) the threshold for deletion of node (default: 0.8)
@@ -48,7 +47,7 @@ Contact: Qiusheng WU (565715597@qq.com)
 
 * Chinese version
 
-  <u>https://wqssf102.github.io/fastnc/</u>
+  <u>https://wqssf102.github.io/fastnc++/</u>
 
 * English version
 
