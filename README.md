@@ -1,10 +1,10 @@
-# FastNC++：Fast calculation of natural connectivity
+# FastNC2：Fast calculation of natural connectivity
 ## Installing
-FastNC++ can be installed using conda or from source.
+FastNC2 can be installed using conda or from source.
 ## Conda
 To install through conda, use:
 ```
-conda create -n fastnc++ -c wqssf102 fastnc++
+conda create -n fastnc2 -c wqssf102 fastnc2
 ```
 ## Compiling from source
 ```
@@ -20,7 +20,7 @@ g++
 ```
 mklroot=path_mkl
 boostroot=path_boos
-g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc++ fastnc++.cpp common.cpp -DMKL_ILP64 -m64 \
+g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc2 fastnc2.cpp common.cpp -DMKL_ILP64 -m64 \
  -Wl,--start-group \
  ${mklroot}/lib/libmkl_scalapack_ilp64.a \
  ${mklroot}/lib/libmkl_cdft_core.a \
@@ -34,8 +34,8 @@ g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc++ fastnc++.cpp c
 ```
 **help**：
 ```
-fastnc++ --h
-Program: FastNC++ (use c++ to calculate the natural connectivity)
+fastnc2 --h
+Program: FastNC2 (use c++ to calculate the natural connectivity)
 Contact: Qiusheng WU (565715597@qq.com)
 
   -i [ --input ] arg          input.txt,The result from get.adjacency function of igraph package
