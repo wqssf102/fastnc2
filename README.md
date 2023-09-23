@@ -6,31 +6,9 @@ To install through conda, use:
 ```
 conda create -n fastnc2 -c wqssf102 fastnc2
 ```
-## Compiling from source
+## Or download the compiled version
 ```
-Compiling from source requires these libraries and software:
-```
-```
-C++11 (gcc-4.9.0+, clang-4.9.0+, etc)
-OpenMP 4.0+
-Boost
-mkl
-g++
-```
-```
-mklroot=path_mkl
-boostroot=path_boos
-g++ -std=c++11 -O3 -fopenmp -march=native -mavx -mfma -o fastnc2 fastnc2.cpp common.cpp -DMKL_ILP64 -m64 \
- -Wl,--start-group \
- ${mklroot}/lib/libmkl_scalapack_ilp64.a \
- ${mklroot}/lib/libmkl_cdft_core.a \
- ${mklroot}/lib/libmkl_intel_ilp64.a \
- ${mklroot}/lib/libmkl_gnu_thread.a \
- ${mklroot}/lib/libmkl_core.a \
- ${mklroot}/lib/libmkl_blacs_openmpi_ilp64.a \
-  -Wl,--end-group -lgomp -lpthread -lm -ldl -I${mklroot}/include/ -L${mklroot}/lib \
-  -static -static-libgcc -static-libstdc++ -lboost_program_options -I${boostroot} \
-  -L${boostroot}/stage/lib
+<u>https://wqssf102.github.io/fastnc2/</u>
 ```
 **help**：
 ```
